@@ -24,19 +24,27 @@ public class AccountService {
         if(username.equals("") || password.length() < 4){
             return null;
         }
-        Account newAccount = accountDAO.insertAccount(checkAccount);
+        Account newAccount = accountDAO.insertAccount(account);
         return newAccount;
     }
 
     public Account login(Account account){
         Account checkAccount = accountDAO.getAccountByUsername(account.getUsername());
         if(checkAccount == null){
+            
             return null;
         }
-        if(checkAccount.getPassword() != account.getPassword()){
+        if(!(checkAccount.getPassword().equals(account.getPassword()))){
+            
             return null;
         }
+        
         return checkAccount;
     }
+
+    public Account getAccountById(int account_id){
+        return accountDAO.getAccountById(account_id);
+    }
+    
   
 }
